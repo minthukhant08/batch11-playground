@@ -1,17 +1,16 @@
-import { ReactNode } from "react"
+import React from "react"
 import { twMerge } from "tailwind-merge"
 
 type CardProp = {
-    children: ReactNode,
+    children: React.ReactNode
     className?: string
 }
-
-export default function Card({ children, className} : CardProp){
+export default function Card({ className, children} : CardProp){
     return (
-        <div className={twMerge(" cursor-pointer rounded-sm m-2 bg-amber-500 p-2 text-black flex flex-col gap-3 border-2 border-amber-300",className )}>
-            { children}
+        <div className={twMerge("bg-white rounded-2xl border p-4 transition-all duration-300 border-slate-100 hover:border-amber-200 hover:shadow-md hover:shadow-amber-50/50", className)}>
+            {
+                children
+            }
         </div>
-        
     )
 }
-

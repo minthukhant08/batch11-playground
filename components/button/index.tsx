@@ -1,24 +1,20 @@
-import { MouseEvent, MouseEventHandler, useState } from "react"
-import { twMerge } from "tailwind-merge"
-type ButtonPorp = {
-  text: string,
-  className?: string,
-  onClick?: MouseEventHandler<HTMLButtonElement>
+import { Plus, type LucideIcon } from 'lucide-react'
+import { twMerge } from 'tailwind-merge'
+
+type ButtonProps = {
+    text: string,
+    icon?: LucideIcon,
+    disabled?: boolean
+    onClick?: () => void,
+    className?: string
 }
+export default function Button({ text, icon: Icon, onClick, disabled, className }: ButtonProps) {
 
-export default function Button({ className, text, onClick }: ButtonPorp) {
-  const [clicked, setClicked] = useState<boolean>(false)
-
-  const handleClick = (e : MouseEvent<HTMLButtonElement>) => {
-    setClicked(!clicked)
-    onClick && onClick(e)
-  }
-  
-  return (
-    <button 
-      onClick={handleClick}
-      className={twMerge(`rounded ${ clicked ? 'text-green-600' : 'text-red-600' } color border-4 border-amber-100 bg-amber-500`, className)}>
-      {text}
-    </button>
-  )
+    return (
+        <button disabled={disabled} onClick={onClick}
+            className={twMerge('px-3 py-1.5 rounded-xl text-xs font-sans font-medium flex items-center gap-1 transition-all bg-amber-600  text-white shadow-sm', disabled ? 'cursor-not-allowed' : 'active:scale-95 hover:bg-amber-700 cursor-pointer', className)}
+            > {Icon && <Icon />}
+            {text}
+        </button>
+    )
 }
